@@ -78,20 +78,16 @@ o = (Options) The number of virtual options saved and entitled to payment by all
 
 _Note: The calculation of the exit proceeds or profit distribution share treats the option beneficiaries in the context of the exit transaction or profit distribution as if they had held / sold company shares themselves, or as holders of company shares were to participate in the sales proceeds / profit distribution. In this respect, the nominal capital has to be increased by the number of virtual options entitled to pay (so-called fully diluted consideration) and, on the other hand, revenue preferences to be paid to certain shareholders as well as benefits on the basis of debt recovery certificates._
 
-## Veräußerung und Vererbung von Optionen
-Die im Rahmen des VSOP ausgegebenen Optionen sind ohne vorherige schriftliche Zustimmung von UnitedCrowd nicht übertragbar. Werden ausgegebene Optionen ohne vorherige Genehmigung übertragen, verfallen sie ohne Anspruch auf Schadenersatz. Die Vererbung ausgegebener Optionen ist jedoch möglich.
+## Sale and inheritance of options
+The options issued under the VSOP are not transferable without UnitedCrowd's prior written consent. If options are transferred without prior approval, they expire without compensation. However, options can be inherited.
 
-## Kapitalerhöhung und Kapitalherabsetzung
-Die ausgegebenen Optionen unterliegen keinem Verwässerungsschutzmechanismus, beispielsweise im Falle einer Kapitalerhöhung der Gesellschaft. Bei einer Kapitalherabsetzung durch Zusammenlegung von Anteilen ohne Kapitalrückzahlung reduziert sich die Anzahl der ausgegebenen Optionen anteilig entsprechend der Kapitalherabsetzung.
+## Capital increase and capital decrease
+The options issued are not subject to a dilution protection mechanism, for example in the event of a capital increase by the company. In the event of a capital reduction by pooling shares without repayment of capital, the number of options issued is reduced proportionately in accordance with the capital reduction.
 
-## Tokenized VSOP – Auch für Ihr Unternehmen
-UnitedCrowd bietet Unternehmen die Möglichkeit Erfolgsbeteiligungsprogramme mit Tokenized Virtual Shares ganz leicht zu implementiert.
+## Tokenized VSOP - also for your company
+UnitedCrowd offers companies the opportunity to easily implement profit sharing programs with tokenized virtual shares.
 
-Dafür werden wir auf unserer Plattform alles zur Verfügung stellen, was Unternehmen für die Umsetzung eines VSOP benötigen – unbürokratisch, übersichtlich und anpassbar.
-
-
-- Contract requires `BaseOptionsConverter.sol`, `OptionsCalculator.sol`, `EmployeesList.sol`, 'ESOPTypes.sol`
-- Contract based on `solidity ^0.4.26`
+For this purpose, we will provide everything on our platform that companies need to implement a VSOP - unbureaucratic, clear and adaptable.
 
 ## Function list
 
@@ -109,6 +105,9 @@ employeeSignsToESOP() | finalizing signup; requires `emp.state == EmployeeState.
 toggleEmployeeSuspension() | handels good- and bad leaver events; requires `emp.state == EmployeeState.Employed`
 terminateEmployee() | terminates vesting applies; good leaver events; bad leaver events; calculation of options and bonus (`remainingPoolOptions`; `totalExtraOptions`)
 offerOptionsConversion() | call before options conversion contract to prevent re-entry; burns options; exercise options in the name of employee and assign those to `exerciseFor`
+
+- Contract requires `BaseOptionsConverter.sol`, `OptionsCalculator.sol`, `EmployeesList.sol`, 'ESOPTypes.sol`
+- Contract based on `solidity ^0.4.26`
 
 
 
