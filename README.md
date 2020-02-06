@@ -14,12 +14,14 @@ UnitedCrowd may voluntarily offer virtual options to team members, partners, or 
 
 A total number of virtual options, the so-called pool, was defined for distribution to our team. A team member receives a certain percentage of this pool. Options that were distributed to team members are removed from the pool. The number of options a team member receives depends on how long they have been participating in the program or have been part of the UnitedCrowd team. Because: The more employees have already received options, the smaller the pool and the lower the total number of options, from which the percentage of a new employee is calculated. Employees who have supported UnitedCrowd for a long time now have more options than new team members.
 
-img!!!
+![VSOP Overview Frontend](./docs/vsop-1.png)
+
 ## Vesting
 Die ausgegebenen virtuellen Optionen unterliegen einem Ausübungsmechanismus, d.h. einem Algorithmus der bestimmt wie viele der Optionen die ein Mitarbeiter erhalten hat, ausgeübt werden können. Optionen, die ausgeübt werden können, werden als „vested“ bezeichnet.
 
 Unmittelbar nach der Ausgabe von Optionen an einen Mitarbeiter bleiben zunächst alle Optionen für einen bestimmten Zeitraum gesperrt (Cliff-Periode). Nach Ende der Cliff-Periode steigt der Anteil ausübbarer Optionen, die ein Teammitglied besitzt, linear monatlich jeweils zum Ende des letzten Tages des Monats solange an, bis alle Optionen ausübbar sind. Sollte ein Teammitglied UnitedCrowd verlassen, bevor seine Optionen vollständig gevested sind, so behält es den Anteil, der zu diesem Zeitpunkt bereits ausübbar ist. Die Optionen, die bis dahin noch nicht gevested wurden, gelangen zurück in den VSOP-Pool. Dies gilt jedoch nicht, falls der Vertrag mit dem Teammitglied aus Gründen gekündigt wird, die es zu verantworten hat, wie beispielsweise Fehlverhalten. Ein solches Ereignis wird als „Bad Leaver Event“ bezeichnet. Bei einem Bad Leaver Event verfallen alle Optionen, die das Teammitglied besitzt und gelangen zurück in den Pool.
-img!!
+
+![VSOP Vesting](./docs/UnitedCrowd-VSOP-Vesting.png)
 
 ## Exit - the exercise event
 Options grant their owners a right to payment of a certain amount of money. This claim can be asserted when an exit occurs, which is therefore also called the exercise event. Such an exercise event occurs when one of the following conditions is met:
@@ -74,7 +76,7 @@ s = (share capital) The amount of the (sold) nominal capital of the company at t
 
 o = (Options) The number of virtual options saved and entitled to payment by all those entitled to options.
 
-_ Note: The calculation of the exit proceeds or profit distribution share treats the option beneficiaries in the context of the exit transaction or profit distribution as if they had held / sold company shares themselves, or as holders of company shares were to participate in the sales proceeds / profit distribution. In this respect, the nominal capital has to be increased by the number of virtual options entitled to pay (so-called fully diluted consideration) and, on the other hand, revenue preferences to be paid to certain shareholders as well as benefits on the basis of debt recovery certificates. _
+_Note: The calculation of the exit proceeds or profit distribution share treats the option beneficiaries in the context of the exit transaction or profit distribution as if they had held / sold company shares themselves, or as holders of company shares were to participate in the sales proceeds / profit distribution. In this respect, the nominal capital has to be increased by the number of virtual options entitled to pay (so-called fully diluted consideration) and, on the other hand, revenue preferences to be paid to certain shareholders as well as benefits on the basis of debt recovery certificates._
 
 ## Veräußerung und Vererbung von Optionen
 Die im Rahmen des VSOP ausgegebenen Optionen sind ohne vorherige schriftliche Zustimmung von UnitedCrowd nicht übertragbar. Werden ausgegebene Optionen ohne vorherige Genehmigung übertragen, verfallen sie ohne Anspruch auf Schadenersatz. Die Vererbung ausgegebener Optionen ist jedoch möglich.
@@ -92,6 +94,21 @@ Dafür werden wir auf unserer Plattform alles zur Verfügung stellen, was Untern
 - Contract based on `solidity ^0.4.26`
 
 ## Function list
-### Basic functions
+
 Function | Description
 ---------|------------
+distributeAndReturnToPool() | enumerate all employees that were offered poolOptions after than fromIdx -1 employee
+removeEmployeesWithExpiredSignaturesAndReturnFadeout() | removes employees from vsop with expired signup
+setCompanyDetails() | set all company detail parameters (`companyName`; `companyCity`; `companyCountry`; `companyRegisterNumber`;)
+setLegalDetails() | set legal parameters (`courtCity`; `courtCountry`)
+setCodeDetails() | set code parameters (`repoURL`; `commitId`)
+openESOP() | Init VSOP
+offerOptionsToEmployee() | ...
+increaseEmployeeExtraOptions() | increases amount of bonus options of employee; requires `EmployeeState`
+employeeSignsToESOP() | finalizing signup; requires `emp.state == EmployeeState.WaitingForSignature`
+toggleEmployeeSuspension() | handels good- and bad leaver events; requires `emp.state == EmployeeState.Employed`
+terminateEmployee() | terminates vesting applies; good leaver events; bad leaver events; calculation of options and bonus (`remainingPoolOptions`; `totalExtraOptions`)
+offerOptionsConversion() | call before options conversion contract to prevent re-entry; burns options; exercise options in the name of employee and assign those to `exerciseFor`
+
+
+
