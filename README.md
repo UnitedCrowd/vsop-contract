@@ -17,9 +17,9 @@ A total number of virtual options, the so-called pool, was defined for distribut
 ![VSOP Overview Frontend](./docs/vsop-1.png)
 
 ## Vesting
-Die ausgegebenen virtuellen Optionen unterliegen einem Ausübungsmechanismus, d.h. einem Algorithmus der bestimmt wie viele der Optionen die ein Mitarbeiter erhalten hat, ausgeübt werden können. Optionen, die ausgeübt werden können, werden als „vested“ bezeichnet.
+The virtual options issued are subject to an exercise mechanism, i.e. an algorithm that determines how many of the options an employee has been given can be exercised. Options that can be exercised are called “vested”.
 
-Unmittelbar nach der Ausgabe von Optionen an einen Mitarbeiter bleiben zunächst alle Optionen für einen bestimmten Zeitraum gesperrt (Cliff-Periode). Nach Ende der Cliff-Periode steigt der Anteil ausübbarer Optionen, die ein Teammitglied besitzt, linear monatlich jeweils zum Ende des letzten Tages des Monats solange an, bis alle Optionen ausübbar sind. Sollte ein Teammitglied UnitedCrowd verlassen, bevor seine Optionen vollständig gevested sind, so behält es den Anteil, der zu diesem Zeitpunkt bereits ausübbar ist. Die Optionen, die bis dahin noch nicht gevested wurden, gelangen zurück in den VSOP-Pool. Dies gilt jedoch nicht, falls der Vertrag mit dem Teammitglied aus Gründen gekündigt wird, die es zu verantworten hat, wie beispielsweise Fehlverhalten. Ein solches Ereignis wird als „Bad Leaver Event“ bezeichnet. Bei einem Bad Leaver Event verfallen alle Optionen, die das Teammitglied besitzt und gelangen zurück in den Pool.
+Immediately after options are issued to an employee, all options remain blocked for a certain period of time (cliff period). At the end of the cliff period, the proportion of exercisable options that a team member has increases linearly monthly at the end of the last day of the month until all options can be exercised. If a team member leaves UnitedCrowd before their options are fully vested, they will retain the portion that is already exercisable at that time. The options that have not yet been vested are returned to the VSOP pool. However, this does not apply if the contract with the team member is terminated for reasons for which it is responsible, such as misconduct. Such an event is known as a “bad leaver event”. At a bad leaver event, all options that the team member has expire and return to the pool.
 
 ![VSOP Vesting](./docs/UnitedCrowd-VSOP-Vesting.png)
 
@@ -93,18 +93,18 @@ For this purpose, we will provide everything on our platform that companies need
 
 Function | Description
 ---------|------------
-distributeAndReturnToPool() | enumerate all employees that were offered poolOptions after than fromIdx -1 employee
+distributeAndReturnToPool() | enumerates all employees that were offered poolOptions after than fromIdx -1 employee
 removeEmployeesWithExpiredSignaturesAndReturnFadeout() | removes employees from vsop with expired signup
-setCompanyDetails() | set all company detail parameters (`companyName`; `companyCity`; `companyCountry`; `companyRegisterNumber`;)
-setLegalDetails() | set legal parameters (`courtCity`; `courtCountry`)
-setCodeDetails() | set code parameters (`repoURL`; `commitId`)
+setCompanyDetails() | sets all company detail parameters (`companyName`; `companyCity`; `companyCountry`; `companyRegisterNumber`;)
+setLegalDetails() | sets legal parameters (`courtCity`; `courtCountry`)
+setCodeDetails() | sets code parameters (`repoURL`; `commitId`)
 openESOP() | Init VSOP
-offerOptionsToEmployee() | ...
+offerOptionsToEmployee() | Options calculations bib
 increaseEmployeeExtraOptions() | increases amount of bonus options of employee; requires `EmployeeState`
 employeeSignsToESOP() | finalizing signup; requires `emp.state == EmployeeState.WaitingForSignature`
 toggleEmployeeSuspension() | handels good- and bad leaver events; requires `emp.state == EmployeeState.Employed`
 terminateEmployee() | terminates vesting applies; good leaver events; bad leaver events; calculation of options and bonus (`remainingPoolOptions`; `totalExtraOptions`)
-offerOptionsConversion() | call before options conversion contract to prevent re-entry; burns options; exercise options in the name of employee and assign those to `exerciseFor`
+offerOptionsConversion() | is being called before options conversion contract to prevent re-entry; burns options; exercise options in the name of employee and assign those to `exerciseFor`
 
 - Contract requires `BaseOptionsConverter.sol`, `OptionsCalculator.sol`, `EmployeesList.sol`, 'ESOPTypes.sol`
 - Contract based on `solidity ^0.4.26`
